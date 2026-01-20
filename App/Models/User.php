@@ -11,7 +11,7 @@ class User
     private $password;
     private Role $role;
 
-    public function __construct(string $firstName,string $username,string $lastName,string $email,string $password, Role $role)
+    public function __construct(string $firstName,string $lastName,string $username,string $email,string $password, Role $role)
     {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
