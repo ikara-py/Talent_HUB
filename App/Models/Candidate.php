@@ -6,18 +6,18 @@ class Candidate extends User
 {
     
     private $phone;
-    private $skills; 
+    private $tags; 
     private $created_at;
 
     public function __construct(
         
         string $phone ,
-        array $skills,
+        array $tags,
         string $created_at 
     ) {
         
         $this->phone = $phone;
-        $this->skills = $skills;
+        $this->tags = $tags;
         $this->created_at = $created_at;
     }
 
@@ -26,9 +26,9 @@ class Candidate extends User
         return $this->phone;
     }
 
-    public function getSkills()
+    public function gettags()
     {
-        return $this->skills;
+        return $this->tags;
     }
 
     public function getCreatedAt()
@@ -41,9 +41,9 @@ class Candidate extends User
         $this->phone = $phone;
     }
 
-    public function setSkills($skills)
+    public function settags($tags)
     {
-        $this->skills = $skills;
+        $this->tags = $tags;
     }
 
     public function setCreatedAt($created_at)
