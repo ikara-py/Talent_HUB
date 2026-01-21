@@ -4,52 +4,57 @@ namespace App\Models;
 
 class Candidate extends User
 {
-    
-    private $phone;
-    private $tags; 
-    private $created_at;
+    private string $phone;
+    private array $tags;
+    private string $created_at;
 
     public function __construct(
-        
-        string $phone ,
+        string $firstName,
+        string $lastName,
+        string $username,
+        string $email,
+        string $password,
+        Role $role,
+        string $phone,
         array $tags,
-        string $created_at 
+        string $created_at
     ) {
-        
+        parent::__construct(
+            $firstName,
+            $lastName,
+            $username,
+            $email,
+            $password,
+            $role
+        );
+
         $this->phone = $phone;
         $this->tags = $tags;
         $this->created_at = $created_at;
     }
 
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->phone;
     }
 
-    public function gettags(): array
+    public function getTags(): array
     {
         return $this->tags;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): string
     {
         return $this->created_at;
     }
 
-    public function setPhone($phone)
+    public function setPhone(string $phone): void
     {
         $this->phone = $phone;
     }
 
-    public function settags(array $tags)
+    public function setTags(array $tags): void
     {
         $this->tags = $tags;
     }
-
-    public function setCreatedAt($created_at)
-    {
-        $this->created_at = $created_at;
-    }
 }
-
-?>
