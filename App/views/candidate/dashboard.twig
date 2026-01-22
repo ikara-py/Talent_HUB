@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Dashboard - TalentHub</title>
+    <link rel="stylesheet" href="{{ base_url }}/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="{{ url() }}" class="logo">TalentHub</a>
+            <div class="nav-links">
+                <span>Welcome, {{ session.user_full_name }}!</span>
+                <a href="{{ url('auth/logout') }}" class="btn btn-secondary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h3>Candidate Menu</h3>
+            <ul>
+                <li><a href="{{ url('candidate/dashboard') }}" class="active">Dashboard</a></li>
+                <li><a href="{{ url('candidate/offers') }}">Browse Offers</a></li>
+                <li><a href="{{ url('candidate/applications') }}">My Applications</a></li>
+                <li><a href="{{ url('candidate/profile') }}">My Profile</a></li>
+            </ul>
+        </aside>
+
+        <main class="dashboard-content">
+            <h1>Candidate Dashboard</h1>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Applications Sent</h3>
+                    <p class="stat-number">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending</h3>
+                    <p class="stat-number">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Accepted</h3>
+                    <p class="stat-number">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Available Offers</h3>
+                    <p class="stat-number">0</p>
+                </div>
+            </div>
+
+            <div class="recent-offers">
+                <h2>Latest Job Offers</h2>
+                <p>No job offers available at the moment.</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

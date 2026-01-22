@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - TalentHub</title>
+    <link rel="stylesheet" href="{{ base_url }}/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="{{ url() }}" class="logo">TalentHub</a>
+            <div class="nav-links">
+                <span>Welcome, {{ session.user_full_name }}!</span>
+                <a href="{{ url('auth/logout') }}" class="btn btn-secondary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h3>Admin Menu</h3>
+            <ul>
+                <li><a href="{{ url('admin/dashboard') }}" class="active">Dashboard</a></li>
+                <li><a href="{{ url('admin/users') }}">Manage Users</a></li>
+                <li><a href="{{ url('admin/offers') }}">Manage Offers</a></li>
+                <li><a href="{{ url('admin/applications') }}">Manage Applications</a></li>
+                <li><a href="{{ url('admin/statistics') }}">Statistics</a></li>
+            </ul>
+        </aside>
+
+        <main class="dashboard-content">
+            <h1>Admin Dashboard</h1>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Users</h3>
+                    <p class="stat-number">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Offers</h3>
+                    <p class="stat-number">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Applications</h3>
+                    <p class="stat-number">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Recruiters</h3>
+                    <p class="stat-number">0</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
