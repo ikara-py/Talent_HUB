@@ -1,0 +1,23 @@
+RewriteEngine On
+
+# Prevent directory listing
+Options -Indexes
+
+# Allow direct access to CSS files
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^css/(.*)$ css/$1 [L]
+
+# Allow direct access to JS files
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^js/(.*)$ js/$1 [L]
+
+# Allow direct access to image files
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^images/(.*)$ images/$1 [L]
+
+# Allow access to any existing files and directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Route all other requests to index.php
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
