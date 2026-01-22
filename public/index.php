@@ -5,4 +5,4 @@ require_once '../config/connection.php';
 
 use App\Core\App;
 
-$app = new App();
+$App = new App();

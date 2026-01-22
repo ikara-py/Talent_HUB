@@ -15,11 +15,11 @@ class App
         if (strtolower($url[0]) === 'home') {
             $controllerName = 'Home';
         }
-        if (file_exists("../app/controllers/{$controllerName}.php")) {
+        if (file_exists("../App/Controllers/{$controllerName}.php")) {
             $this->controller = 'App\Controllers\\' . $controllerName;
             unset($url[0]);
         }
-        require_once "../app/controllers/" . basename(str_replace('\\', '/', $this->controller)) . ".php";
+        require_once "../App/Controllers/" . basename(str_replace('\\', '/', $this->controller)) . ".php";
         $this->controller = new $this->controller;
         if (isset($url[1])) {
             if (method_exists($this->controller, $url[1])) {

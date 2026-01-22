@@ -37,11 +37,11 @@ class Controller
 
     public function view($view, $data = []): void
     {
-        if (file_exists("../app/views/{$view}.twig")) {
+        if (file_exists("../App/views/{$view}.twig")) {
             echo $this->twig->render("{$view}.twig", $data);
         } else {
-            if (file_exists('../app/views/errors/404.php')) {
-                require_once '../app/views/errors/404.php';
+            if (file_exists('../App/views/errors/404.php')) {
+                require_once '../App/views/errors/404.php';
             } else {
                 die("404 - View not found: {$view}");
             }
