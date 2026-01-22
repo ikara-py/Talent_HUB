@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category ? 'Edit' : 'Create' }} Category - TalentHub Admin</title>
+    <link rel="stylesheet" href="{{ base_url }}/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="{{ url('admin/dashboard') }}" class="logo">TalentHub Admin</a>
+            <div class="nav-links">
+                <a href="{{ url('admin/categories') }}">Categories</a>
+                <a href="{{ url('admin/tags') }}">Tags</a>
+                <a href="{{ url('auth/logout') }}" class="btn btn-secondary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container" style="margin-top: 2rem;">
+        <div class="form-container">
+            <h1>{{ category ? 'Edit' : 'Create' }} Category</h1>
+            
+            {% if error %}
+                <div class="alert alert-error">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST" action="{{ category ? url('admin/editCategory/' ~ category.getId()) : url('admin/createCategory') }}">
+                <div class="form-group">
+                    <label for="name">Category Name</label>
+                    <input type="text" 
+                           id="name" 
+                           name="name" 
+                           value="{{ category ? category.getName() : '' }}" 
+                           required 
+                           placeholder="e.g., Web Development">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">{{ category ? 'Update' : 'Create' }} Category</button>
+                    <a href="{{ url('admin/categories') }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
