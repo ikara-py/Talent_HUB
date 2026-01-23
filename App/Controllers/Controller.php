@@ -37,19 +37,11 @@ class Controller
 
     public function view($view, $data = []): void
     {
-        // Check for PHP view
-        $phpViewPath = __DIR__ . "/../views/{$view}.php";
-        if (file_exists($phpViewPath)) {
-            extract($data);
-            require $phpViewPath;
-            return;
-        }
-
-        if (file_exists("../app/views/{$view}.twig")) {
+        if (file_exists("../App/views/{$view}.twig")) {
             echo $this->twig->render("{$view}.twig", $data);
         } else {
-            if (file_exists('../app/views/errors/404.php')) {
-                require_once '../app/views/errors/404.php';
+            if (file_exists('../App/views/errors/404.php')) {
+                require_once '../App/views/errors/404.php';
             } else {
                 die("404 - View not found: {$view}");
             }

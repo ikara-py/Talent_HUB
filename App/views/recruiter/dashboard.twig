@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Dashboard - TalentHub</title>
+    <link rel="stylesheet" href="{{ base_url }}/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="{{ url() }}" class="logo">TalentHub</a>
+            <div class="nav-links">
+                <span>Welcome, {{ session.user_full_name }}!</span>
+                <a href="{{ url('auth/logout') }}" class="btn btn-secondary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h3>Recruiter Menu</h3>
+            <ul>
+                <li><a href="{{ url('recruiter/dashboard') }}" class="active">Dashboard</a></li>
+                <li><a href="{{ url('recruiter/offers') }}">My Offers</a></li>
+                <li><a href="{{ url('recruiter/create-offer') }}">Create Offer</a></li>
+                <li><a href="{{ url('recruiter/applications') }}">Applications</a></li>
+                <li><a href="{{ url('recruiter/profile') }}">Company Profile</a></li>
+            </ul>
+        </aside>
+
+        <main class="dashboard-content">
+            <h1>Recruiter Dashboard</h1>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>My Offers</h3>
+                    <p class="stat-number">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Applications</h3>
+                    <p class="stat-number">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending Reviews</h3>
+                    <p class="stat-number">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Accepted Candidates</h3>
+                    <p class="stat-number">0</p>
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <h2>Recent Activity</h2>
+                <p>No recent activity to display.</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -19,13 +19,14 @@ class UserRepository
     }
     public function save(User $user): bool
     {
-        $sql = "INSERT INTO users (first_name, last_name, email, password, role_id) 
-                VALUES (:first_name, :last_name, :email, :password, :role_id)";
+        $sql = "INSERT INTO users (first_name, last_name, username, email, password, role_id) 
+                VALUES (:first_name, :last_name, :username, :email, :password, :role_id)";
         $stmt = $this->db->prepare($sql);
 
         return $stmt->execute([
             'first_name' => $user->getFirstName(),
             'last_name'  => $user->getLastName(),
+            'username'   => $user->getUsername(),
             'email'      => $user->getEmail(),
             'password'   => $user->getPassword(),
             'role_id'    => $user->getRole()->getId()
@@ -43,7 +44,9 @@ class UserRepository
         if (!$row) {
             return null;
         }
+
         $role = $this->roleRepository->findById((int)$row['role_id']);
+        
         return new User(
             $row['first_name'],
             $row['last_name'],
@@ -54,4 +57,27 @@ class UserRepository
         );
     }
 
+    public function findById(int $id): ?User
+    {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$row) {
+            return null;
+        }
+
+        $role = $this->roleRepository->findById((int)$row['role_id']);
+        
+        return new User(
+            $row['first_name'],
+            $row['last_name'],
+            $row['username'],
+            $row['email'],
+            $row['password'],
+            $role
+        );
+    }
 }

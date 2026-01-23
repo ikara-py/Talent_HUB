@@ -12,7 +12,6 @@ class CandidateController extends Controller
     {
         parent::__construct();
 
-        // Authorization check
         if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'candidate') {
             $this->view('errors/403');
             exit();
@@ -21,9 +20,6 @@ class CandidateController extends Controller
         $this->candidateRepository = new CandidateRepository();
     }
 
-    /**
-     * Candidate dashboard
-     */
     public function index(): void
     {
         $candidateId = $_SESSION['user_id'] ?? null;
@@ -46,46 +42,26 @@ class CandidateController extends Controller
         ]);
     }
 
-    /**
-     * Candidate profile page
-     */
-    public function profile(): void
-    {
-        $candidateId = $_SESSION['user_id'] ?? null;
 
-        if (!$candidateId) {
-            $this->view('errors/403');
-            return;
-        }
 
-        $candidate = $this->candidateRepository->findById((int) $candidateId);
 
-        if (!$candidate) {
-            $this->view('errors/404');
-            return;
-        }
-
-        $this->view('candidate/profile', [
-            'title'     => 'My Profile',
-            'candidate' => $candidate
-        ]);
-    }
-    /**
-    * Dashboard view displaying real data counts
-    */
     public function dashboard(): void
     {
         $userRepo = new \App\Repositories\UserRepository();
         $candidateRepo = $this->candidateRepository;
 
-        $userCount = $userRepo->countAll();
-        $candidateCount = $candidateRepo->countAll();
+        // $userCount = $userRepo->countAll();
+        // $candidateCount = $candidateRepo->countAll();
 
-        $this->view('dashboard', [
-            'title' => 'Dashboard',
-            'userCount' => $userCount,
-            'candidateCount' => $candidateCount,
-        ]);
+        $this->view('candidate/dashboard', [
+        'title' => 'Candidate Dashboard',
+    ]);
+
+        // $this->view('dashboard', [
+        //     'title' => 'Dashboard',
+            // 'userCount' => $userCount,
+            // 'candidateCount' => $candidateCount,
+        // ]);
     }
 }
 
