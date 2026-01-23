@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - TalentHub</title>
-    <link rel="stylesheet" href="{{ base_url }}/css/style.css">
-</head>
-<body>
-    <div class="auth-container">
-        <div class="auth-card">
-            <h1>Login</h1>
-            
-            {% if error %}
-                <div class="alert alert-error">{{ error }}</div>
-            {% endif %}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Login - TalentHub</title>
+		<link rel="stylesheet" href="{{ base_url }}/css/style.css">
+	</head>
+	<body>
+		<div class="auth-container">
+			<div class="auth-card">
+				<h1>Login</h1>
 
-            <form method="POST" action="{{ url('auth/login') }}">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
+				{% if error %}
+					<div class="alert alert-error">{{ error }}</div>
+				{% endif %}
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
+				<form method="POST" action="{{ url('auth/login') }}" class="space-y-4">
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input type="email" id="email" name="email" required>
+					</div>
 
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input type="password" id="password" name="password" required>
+					</div>
 
-            <p class="auth-link">
-                Don't have an account? <a href="{{ url('auth/register') }}">Register here</a>
-            </p>
-        </div>
-    </div>
-</body>
+					<button type="submit" class="btn btn-primary w-full">Login</button>
+				</form>
+
+				<p class="auth-link">
+					Don't have an account?
+					<a href="{{ url('auth/register') }}">Register here</a>
+				</p>
+			</div>
+		</div>
+	</body>
 </html>

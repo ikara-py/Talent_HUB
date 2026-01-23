@@ -19,7 +19,7 @@ class CategoryRepository
     {
         $sql = "INSERT INTO categories (name) VALUES (:name)";
         $stmt = $this->db->prepare($sql);
-        
+
         try {
             return $stmt->execute(['name' => $category->getName()]);
         } catch (\PDOException $e) {
@@ -29,10 +29,10 @@ class CategoryRepository
 
     public function findById(int $id): ?Category
     {
-        $sql = "SELECT * FROM categories WHERE id = :id";
+        $sql = "SELECT categories.id, categories.name FROM categories WHERE categories.id = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['id' => $id]);
-        
+
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$row) {
@@ -44,10 +44,10 @@ class CategoryRepository
 
     public function findByName(string $name): ?Category
     {
-        $sql = "SELECT * FROM categories WHERE name = :name";
+        $sql = "SELECT categories.id, categories.name FROM categories WHERE categories.name = :name";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['name' => $name]);
-        
+
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$row) {
@@ -59,7 +59,7 @@ class CategoryRepository
 
     public function getAll(): array
     {
-        $sql = "SELECT * FROM categories ORDER BY name ASC";
+        $sql = "SELECT categories.id, categories.name FROM categories ORDER BY categories.name ASC";
         $stmt = $this->db->query($sql);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -75,7 +75,7 @@ class CategoryRepository
     {
         $sql = "UPDATE categories SET name = :name WHERE id = :id";
         $stmt = $this->db->prepare($sql);
-        
+
         try {
             return $stmt->execute([
                 'name' => $category->getName(),
@@ -90,7 +90,7 @@ class CategoryRepository
     {
         $sql = "DELETE FROM categories WHERE id = :id";
         $stmt = $this->db->prepare($sql);
-        
+
         try {
             return $stmt->execute(['id' => $id]);
         } catch (\PDOException $e) {

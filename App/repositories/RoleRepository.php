@@ -16,7 +16,7 @@ class RoleRepository
     }
     public function findByName(string $name): ?Role
     {
-        $stmt = $this->db->prepare("SELECT * FROM roles WHERE name = :name");
+        $stmt = $this->db->prepare("SELECT roles.id, roles.name FROM roles WHERE roles.name = :name");
         $stmt->execute(['name' => strtolower($name)]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -28,7 +28,7 @@ class RoleRepository
     }
     public function findById(int $id): ?Role
     {
-        $stmt = $this->db->prepare("SELECT * FROM roles WHERE id = :id");
+        $stmt = $this->db->prepare("SELECT roles.id, roles.name FROM roles WHERE roles.id = :id");
         $stmt->execute(['id' => $id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -41,7 +41,7 @@ class RoleRepository
 
     public function getAll(): array
     {
-        $stmt = $this->db->query("SELECT * FROM roles");
+        $stmt = $this->db->query("SELECT roles.id, roles.name FROM roles");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $roles = [];

@@ -19,7 +19,7 @@ class TagRepository
     {
         $sql = "INSERT INTO tags (name) VALUES (:name)";
         $stmt = $this->db->prepare($sql);
-        
+
         try {
             return $stmt->execute(['name' => $tag->getName()]);
         } catch (\PDOException $e) {
@@ -29,10 +29,10 @@ class TagRepository
 
     public function findById(int $id): ?Tag
     {
-        $sql = "SELECT * FROM tags WHERE id = :id";
+        $sql = "SELECT tags.id, tags.name FROM tags WHERE tags.id = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['id' => $id]);
-        
+
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$row) {
@@ -44,10 +44,10 @@ class TagRepository
 
     public function findByName(string $name): ?Tag
     {
-        $sql = "SELECT * FROM tags WHERE name = :name";
+        $sql = "SELECT tags.id, tags.name FROM tags WHERE tags.name = :name";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['name' => $name]);
-        
+
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$row) {
@@ -59,7 +59,7 @@ class TagRepository
 
     public function getAll(): array
     {
-        $sql = "SELECT * FROM tags ORDER BY name ASC";
+        $sql = "SELECT tags.id, tags.name FROM tags ORDER BY tags.name ASC";
         $stmt = $this->db->query($sql);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -75,7 +75,7 @@ class TagRepository
     {
         $sql = "UPDATE tags SET name = :name WHERE id = :id";
         $stmt = $this->db->prepare($sql);
-        
+
         try {
             return $stmt->execute([
                 'name' => $tag->getName(),
@@ -90,7 +90,7 @@ class TagRepository
     {
         $sql = "DELETE FROM tags WHERE id = :id";
         $stmt = $this->db->prepare($sql);
-        
+
         try {
             return $stmt->execute(['id' => $id]);
         } catch (\PDOException $e) {
