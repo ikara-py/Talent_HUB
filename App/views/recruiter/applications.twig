@@ -1,0 +1,11 @@
+<h1>Applications</h1>
+
+<ul>
+  {% for app in applications %}
+    <li>
+      {{ app.candidateName }}
+      <a href="{{ app.cvPath }}">Download CV</a>
+      ({{ app.status }})
+    </li>
+  {% endfor %}
+</ul>
