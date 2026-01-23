@@ -33,7 +33,8 @@ class AuthService
             session_start();
         }
 
-        $_SESSION['user_id'] = $user->getEmail();
+        $_SESSION['user_id'] = $user->getId();
+        $_SESSION['user_email'] = $user->getEmail();
         $_SESSION['user_full_name'] = "{$user->getFirstName()} {$user->getLastName()}";
         $_SESSION['user_role'] = $user->getRole()->getName();
     }
