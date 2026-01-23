@@ -6,3 +6,4 @@ require_once '../config/connection.php';
 use App\Core\App;
 
 $App = new App();
+
