@@ -74,3 +74,77 @@ The database uses a **Class Table Inheritance** strategy. All users reside in a 
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/ikara-py/Talent_HUB
+
+
+
+## Structure
+   ```bash
+Talent_HUB/
+├─ App/
+│  ├─ Controllers/
+│  │  ├─ AdminController.php
+│  │  ├─ AuthController.php
+│  │  ├─ CandidateController.php
+│  │  ├─ Controller.php
+│  │  ├─ Home.php
+│  │  └─ RecruiterController.php
+│  ├─ Core/
+│  │  └─ App.php
+│  ├─ Models/
+│  │  ├─ Candidate.php
+│  │  ├─ Category.php
+│  │  ├─ Recruiter.php
+│  │  ├─ Role.php
+│  │  ├─ Tag.php
+│  │  └─ User.php
+│  ├─ repositories/
+│  │  ├─ CandidateRepository.php
+│  │  ├─ CategoryRepository.php
+│  │  ├─ RecruiterRepository.php
+│  │  ├─ RoleRepository.php
+│  │  ├─ TagRepository.php
+│  │  └─ UserRepository.php
+│  ├─ Services/
+│  │  ├─ AuthService.php
+│  │  └─ RegistrationService.php
+│  └─ views/
+│     ├─ admin/
+│     │  ├─ categories.twig
+│     │  ├─ category_form.twig
+│     │  ├─ dashboard.twig
+│     │  ├─ tag_form.twig
+│     │  └─ tags.twig
+│     ├─ auth/
+│     │  ├─ login.twig
+│     │  └─ register.twig
+│     ├─ candidate/
+│     │  └─ dashboard.twig
+│     ├─ errors/
+│     │  ├─ 403.php
+│     │  └─ 404.php
+│     ├─ home/
+│     │  └─ index.twig
+│     └─ recruiter/
+│        └─ dashboard.twig
+├─ Assets/
+│  └─ useCase.PNG
+├─ config/
+│  ├─ config.php
+│  └─ connection.php
+├─ Database/
+│  ├─ Database.sql
+│  ├─ UML.mwb
+│  ├─ UML.pdf
+│  └─ UML.png
+├─ public/
+│  ├─ css/
+│  │  └─ style.css
+│  ├─ .htaccess
+│  └─ index.php
+├─ .env
+├─ .env.example
+├─ .gitignore
+├─ .htaccess
+├─ composer.json
+├─ composer.lock
+└─ README.md
