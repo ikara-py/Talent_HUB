@@ -26,7 +26,7 @@ class Candidate extends User
         return $this->phone;
     }
 
-    public function gettags()
+    public function gettags(): array
     {
         return $this->tags;
     }
@@ -41,7 +41,7 @@ class Candidate extends User
         $this->phone = $phone;
     }
 
-    public function settags($tags)
+    public function settags(array $tags)
     {
         $this->tags = $tags;
     }

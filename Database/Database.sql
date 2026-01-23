@@ -11,7 +11,7 @@ CREATE TABLE users (
     role_id INT NOT NULL,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
-    username VARCHAR(100) NOT NULL,
+    username VARCHAR(100) NOT NULL UNIQUE,
     email VARCHAR(150) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -25,7 +25,7 @@ CREATE TABLE candidates (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE recruiters (
+CREATE TABLE companies (
     user_id INT PRIMARY KEY,
     company_name VARCHAR(150) NOT NULL,
     company_description TEXT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE tags (
 
 CREATE TABLE offers (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    recruiter_id INT NOT NULL,
+    company_id INT NOT NULL,
     category_id INT NOT NULL,
     title VARCHAR(200) NOT NULL,
     description TEXT NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE offers (
     salary DECIMAL(10, 2) NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_at DATETIME NULL DEFAULT NULL,
-    FOREIGN KEY (recruiter_id) REFERENCES recruiters(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (company_id) REFERENCES companies(user_id) ON DELETE CASCADE,
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE RESTRICT
 );
 
@@ -93,7 +93,7 @@ INSERT INTO users (role_id, first_name, last_name, username, email, password) VA
 (3, 'Peter', 'Parker', 'spiderman_dev', 'peter.parker@outlook.com', '$2y$12$4bk/nDrWnvKFHOoJgeVtdu6ztbPMEuOU46JtngIkBfIeWAmhil3Gm'),
 (3, 'Bruce', 'Banner', 'hulk_data', 'b.banner@gmail.com', '$2y$12$4bk/nDrWnvKFHOoJgeVtdu6ztbPMEuOU46JtngIkBfIeWAmhil3Gm');
 
-INSERT INTO recruiters (user_id, company_name, company_description, website_url) VALUES 
+INSERT INTO companies (user_id, company_name, company_description, website_url) VALUES 
 (2, 'Dunder Mifflin', 'Paper distribution company.', 'https://dundermifflin.com'),
 (3, 'Wayne Enterprises', 'Global conglomerate and tech leader.', 'https://waynecorp.com');
 
@@ -105,7 +105,7 @@ INSERT INTO categories (name) VALUES ('Web Development'), ('Data Science'), ('Ma
 
 INSERT INTO tags (name) VALUES ('PHP'), ('JavaScript'), ('Python'), ('AWS'), ('React'), ('MySQL');
 
-INSERT INTO offers (recruiter_id, category_id, title, description, location, salary) VALUES 
+INSERT INTO offers (company_id, category_id, title, description, location, salary) VALUES 
 (2, 3, 'Regional Manager', 'Lead the Scranton branch to success.', 'Scranton, PA', 60000.00),
 (3, 1, 'Fullstack Developer', 'Building secure web portals using PHP and React.', 'Gotham City', 95000.00),
 (3, 2, 'Senior Data Scientist', 'Deep learning and Gamma radiation analysis.', 'Remote', 140000.00);
