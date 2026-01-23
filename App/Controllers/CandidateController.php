@@ -70,4 +70,22 @@ class CandidateController extends Controller
             'candidate' => $candidate
         ]);
     }
+    /**
+    * Dashboard view displaying real data counts
+    */
+    public function dashboard(): void
+    {
+        $userRepo = new \App\Repositories\UserRepository();
+        $candidateRepo = $this->candidateRepository;
+
+        $userCount = $userRepo->countAll();
+        $candidateCount = $candidateRepo->countAll();
+
+        $this->view('dashboard', [
+            'title' => 'Dashboard',
+            'userCount' => $userCount,
+            'candidateCount' => $candidateCount,
+        ]);
+    }
 }
+
