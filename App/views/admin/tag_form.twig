@@ -1,48 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ tag ? 'Edit' : 'Create' }} Tag - TalentHub Admin</title>
-    <link rel="stylesheet" href="{{ base_url }}/css/style.css">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="container">
-            <a href="{{ url('admin/dashboard') }}" class="logo">TalentHub Admin</a>
-            <div class="nav-links">
-                <a href="{{ url('admin/categories') }}">Categories</a>
-                <a href="{{ url('admin/tags') }}">Tags</a>
-                <a href="{{ url('auth/logout') }}" class="btn btn-secondary">Logout</a>
-            </div>
-        </div>
-    </nav>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{{ tag ? 'Edit' : 'Create' }}
+			Tag - TalentHub Admin</title>
+		<link rel="stylesheet" href="{{ base_url }}/css/style.css">
+	</head>
+	<body>
+		<nav class="navbar">
+			<div class="container">
+				<a href="{{ url('admin/dashboard') }}" class="logo">TalentHub Admin</a>
+				<div class="nav-links">
+					<a href="{{ url('admin/users') }}">Users</a>
+					<a href="{{ url('admin/companies') }}">Companies</a>
+					<a href="{{ url('admin/categories') }}">Categories</a>
+					<a href="{{ url('admin/tags') }}">Tags</a>
+					<a href="{{ url('admin/offers') }}">Offers</a>
+					<a href="{{ url('auth/logout') }}" class="btn btn-secondary">Logout</a>
+				</div>
+			</div>
+		</nav>
 
-    <main class="container" style="margin-top: 2rem;">
-        <div class="form-container">
-            <h1>{{ tag ? 'Edit' : 'Create' }} Tag</h1>
-            
-            {% if error %}
-                <div class="alert alert-error">{{ error }}</div>
-            {% endif %}
+		<main class="container" style="margin-top: 2rem;">
+			<div class="form-container">
+				<h1>{{ tag ? 'Edit' : 'Create' }}
+					Tag</h1>
 
-            <form method="POST" action="{{ tag ? url('admin/editTag/' ~ tag.getId()) : url('admin/createTag') }}">
-                <div class="form-group">
-                    <label for="name">Tag Name</label>
-                    <input type="text" 
-                           id="name" 
-                           name="name" 
-                           value="{{ tag ? tag.getName() : '' }}" 
-                           required 
-                           placeholder="e.g., PHP, JavaScript, React">
-                </div>
+				{% if error %}
+					<div class="alert alert-error">{{ error }}</div>
+				{% endif %}
 
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">{{ tag ? 'Update' : 'Create' }} Tag</button>
-                    <a href="{{ url('admin/tags') }}" class="btn btn-secondary">Cancel</a>
-                </div>
-            </form>
-        </div>
-    </main>
-</body>
+				<form method="POST" action="{{ tag ? url('admin/editTag/' ~ tag.getId()) : url('admin/createTag') }}">
+					<div class="form-group">
+						<label for="name">Tag Name</label>
+						<input type="text" id="name" name="name" value="{{ tag ? tag.getName() : '' }}" required placeholder="e.g., PHP, JavaScript, React">
+					</div>
+
+					<div class="form-actions">
+						<button type="submit" class="btn btn-primary">{{ tag ? 'Update' : 'Create' }}
+							Tag</button>
+						<a href="{{ url('admin/tags') }}" class="btn btn-secondary">Cancel</a>
+					</div>
+				</form>
+			</div>
+		</main>
+	</body>
 </html>

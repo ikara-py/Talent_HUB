@@ -1,65 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - TalentHub</title>
-    <link rel="stylesheet" href="{{ base_url }}/css/style.css">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="container">
-            <a href="{{ url() }}" class="logo">TalentHub</a>
-            <div class="nav-links">
-                <span>Welcome, {{ session.user_full_name }}!</span>
-                <a href="{{ url('auth/logout') }}" class="btn btn-secondary">Logout</a>
-            </div>
-        </div>
-    </nav>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Admin Dashboard - TalentHub</title>
+		<link rel="stylesheet" href="{{ base_url }}/css/style.css">
+	</head>
+	<body>
+		<nav class="navbar">
+			<div class="container">
+				<a href="{{ url('admin/dashboard') }}" class="logo">TalentHub Admin</a>
+				<div class="nav-links">
+					<a href="{{ url('admin/users') }}">Users</a>
+					<a href="{{ url('admin/companies') }}">Companies</a>
+					<a href="{{ url('admin/categories') }}">Categories</a>
+					<a href="{{ url('admin/tags') }}">Tags</a>
+					<a href="{{ url('admin/offers') }}">Offers</a>
+					<a href="{{ url('auth/logout') }}" class="btn btn-secondary">Logout</a>
+				</div>
+			</div>
+		</nav>
 
-    <div class="dashboard-container">
-        <aside class="sidebar">
-            <h3>Admin Menu</h3>
-            <ul>
-                <li><a href="{{ url('admin/dashboard') }}" class="active">Dashboard</a></li>
-                <li><a href="{{ url('admin/categories') }}">Manage Categories</a></li>
-                <li><a href="{{ url('admin/tags') }}">Manage Tags</a></li>
-                <li><a href="{{ url('admin/users') }}">Manage Users</a></li>
-                <li><a href="{{ url('admin/offers') }}">Manage Offers</a></li>
-            </ul>
-        </aside>
+		<main class="container mx-auto px-4 py-8">
+			<div class="mb-8">
+				<h1 class="text-3xl font-bold mb-4">Admin Dashboard</h1>
+				<p class="text-gray-600">Manage users, companies, and platform content</p>
+			</div>
 
-        <main class="dashboard-content">
-            <h1>Admin Dashboard</h1>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Total Categories</h3>
-                    <p class="stat-number">{{ totalCategories ?? 0 }}</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Total Tags</h3>
-                    <p class="stat-number">{{ totalTags ?? 0 }}</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Total Offers</h3>
-                    <p class="stat-number">0</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Total Applications</h3>
-                    <p class="stat-number">0</p>
-                </div>
-            </div>
+			<div class="stats-grid mb-8">
+				<div class="stat-card">
+					<h3>Total Users</h3>
+					<p class="stat-number text-blue-600">{{ totalUsers ?? 0 }}</p>
+				</div>
+				<div class="stat-card">
+					<h3>Total Companies</h3>
+					<p class="stat-number text-green-600">{{ totalCompanies ?? 0 }}</p>
+				</div>
+				<div class="stat-card">
+					<h3>Total Categories</h3>
+					<p class="stat-number text-purple-600">{{ totalCategories ?? 0 }}</p>
+				</div>
+				<div class="stat-card">
+					<h3>Total Tags</h3>
+					<p class="stat-number text-yellow-600">{{ totalTags ?? 0 }}</p>
+				</div>
+				<div class="stat-card">
+					<h3>Total Offers</h3>
+					<p class="stat-number text-red-600">{{ totalOffers ?? 0 }}</p>
+				</div>
+			</div>
 
-            <div class="quick-actions">
-                <h2>Quick Actions</h2>
-                <div class="action-buttons">
-                    <a href="{{ url('admin/createCategory') }}" class="btn btn-primary">Add Category</a>
-                    <a href="{{ url('admin/createTag') }}" class="btn btn-primary">Add Tag</a>
-                    <a href="{{ url('admin/categories') }}" class="btn btn-secondary">View Categories</a>
-                    <a href="{{ url('admin/tags') }}" class="btn btn-secondary">View Tags</a>
-                </div>
-            </div>
-        </main>
-    </div>
-</body>
+			<div class="grid lg:grid-cols-2 gap-6">
+				<div class="bg-white rounded-lg shadow p-6">
+					<h2 class="text-xl font-bold mb-4">User Management</h2>
+					<div class="space-y-3">
+						<a href="{{ url('admin/createUser') }}" class="btn btn-primary block text-center">+ Create New User</a>
+						<a href="{{ url('admin/users') }}" class="btn btn-secondary block text-center">View All Users</a>
+					</div>
+				</div>
+
+				<div class="bg-white rounded-lg shadow p-6">
+					<h2 class="text-xl font-bold mb-4">Company Management</h2>
+					<div class="space-y-3">
+						<a href="{{ url('admin/createCompany') }}" class="btn btn-primary block text-center">+ Create New Company</a>
+						<a href="{{ url('admin/companies') }}" class="btn btn-secondary block text-center">View All Companies</a>
+					</div>
+				</div>
+
+				<div class="bg-white rounded-lg shadow p-6">
+					<h2 class="text-xl font-bold mb-4">Content Management</h2>
+					<div class="space-y-3">
+						<a href="{{ url('admin/createCategory') }}" class="btn btn-primary block text-center">+ Add Category</a>
+						<a href="{{ url('admin/createTag') }}" class="btn btn-primary block text-center">+ Add Tag</a>
+						<a href="{{ url('admin/categories') }}" class="btn btn-secondary block text-center">View Categories</a>
+						<a href="{{ url('admin/tags') }}" class="btn btn-secondary block text-center">View Tags</a>
+					</div>
+				</div>
+
+				<div class="bg-white rounded-lg shadow p-6">
+					<h2 class="text-xl font-bold mb-4">Job Offers</h2>
+					<div class="space-y-3">
+						<a href="{{ url('admin/offers') }}" class="btn btn-primary block text-center">View All Offers</a>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
 </html>
