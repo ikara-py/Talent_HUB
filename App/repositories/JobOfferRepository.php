@@ -3,8 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\JobOffer;
-use Database;
 use PDO;
+
+require_once __DIR__ . '/../../config/connection.php';
 
 class JobOfferRepository
 {
@@ -12,12 +13,17 @@ class JobOfferRepository
 
     public function __construct()
     {
-        $this->db = Database::connect();
+        $this->db = \Database::connect();
     }
 
     public function findByRecruiter(int $recruiterId): array
     {
-        $sql = "SELECT * FROM job_offers WHERE recruiter_id = :rid";
+        // Use the 'offers' table and link to recruiter via 'companies'
+        $sql = "SELECT o.* 
+                FROM offers o
+                INNER JOIN companies c ON o.company_id = c.user_id
+                WHERE c.user_id = :rid AND o.deleted_at IS NULL";
+
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['rid' => $recruiterId]);
 
@@ -27,8 +33,8 @@ class JobOfferRepository
                 $row['id'],
                 $row['title'],
                 $row['description'],
-                $row['recruiter_id'],
-                (bool)$row['is_archived']
+                $row['company_id'], // recruiter ID
+                false // no is_archived column in DB
             );
         }
         return $offers;
@@ -36,21 +42,22 @@ class JobOfferRepository
 
     public function create(JobOffer $job): bool
     {
-        $sql = "INSERT INTO job_offers (title, description, recruiter_id)
-                VALUES (:title, :description, :rid)";
+        $sql = "INSERT INTO offers (title, description, company_id, category_id)
+                VALUES (:title, :description, :company_id, :category_id)";
 
         return $this->db->prepare($sql)->execute([
             'title' => $job->getTitle(),
             'description' => $job->getDescription(),
-            'rid' => $job->getRecruiterId()
+            'company_id' => $job->getRecruiterId(),
+            'category_id' => $job->getCategoryId() ?? 1
         ]);
     }
 
     public function archive(int $jobId, int $recruiterId): bool
     {
-        $sql = "UPDATE job_offers  
-                SET is_archived = 1 
-                WHERE id = :id AND recruiter_id = :rid";
+        $sql = "UPDATE offers
+                SET deleted_at = NOW()
+                WHERE id = :id AND company_id = :rid";
 
         return $this->db->prepare($sql)->execute([
             'id' => $jobId,
