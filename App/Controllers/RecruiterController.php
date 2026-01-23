@@ -23,7 +23,7 @@ class RecruiterController extends Controller
             die('403 - Access denied');
         }
 
-        return $_SESSION['user_id']; // email
+        return $_SESSION['user_id'];
     }
 
 

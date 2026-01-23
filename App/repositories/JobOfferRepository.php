@@ -31,7 +31,7 @@ class JobOfferRepository
                 $row['id'],
                 $row['title'],
                 $row['description'],
-                0, // you can keep 0 since you don’t want numeric ID
+                0, 
                 false,
                 (int)$row['category_id']
             );
@@ -43,7 +43,6 @@ class JobOfferRepository
 
     public function create(JobOffer $job, string $recruiterEmail): bool
     {
-        // Find company_id by email
         $sql = "SELECT user_id FROM users u
                 INNER JOIN companies c ON u.id = c.user_id
                 WHERE u.email = :email";

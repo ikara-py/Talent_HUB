@@ -27,10 +27,27 @@ class JobOffer
         $this->categoryId = $categoryId;
     }
 
-    public function getId(): ?int { return $this->id; }
-    public function getTitle(): string { return $this->title; }
-    public function getDescription(): string { return $this->description; }
-    public function getRecruiterId(): int { return $this->recruiterId; }
-    public function getCategoryId(): int { return $this->categoryId; }
-    public function isArchived(): bool { return $this->isArchived; }
+    public function getId(): ?int { 
+        return $this->id; 
+    }
+    
+    public function getTitle(): string { 
+        return $this->title; 
+    }
+
+    public function getDescription(): string { 
+        return $this->description; 
+    }
+
+    public function getRecruiterId(): int { 
+        return $this->recruiterId; 
+    }
+
+    public function getCategoryId(): int { 
+        return $this->categoryId; 
+    }
+
+    public function isArchived(): bool { 
+        return $this->isArchived; 
+    }
 }

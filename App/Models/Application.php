@@ -21,7 +21,15 @@ class Application
         $this->status = $status;
     }
 
-    public function getCandidateName(): string { return $this->candidateName; }
-    public function getCvPath(): string { return $this->cvPath; }
-    public function getStatus(): string { return $this->status; }
+    public function getCandidateName(): string { 
+        return $this->candidateName; 
+    }
+    
+    public function getCvPath(): string { 
+        return $this->cvPath; 
+    }
+
+    public function getStatus(): string { 
+        return $this->status; 
+    }
 }

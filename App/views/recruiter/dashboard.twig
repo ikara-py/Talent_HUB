@@ -1,14 +1,43 @@
-<h1>Recruiter Dashboard OK ✅</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recruiter Dashboard</title>
+    <link rel="stylesheet" href="/css/recruiter/dashboard.css">
+</head>
+<body>
+
+<h1>Recruiter Dashboard</h1>
+
+<p>
+    <a href="/recruiter/jobs/create">➕ Create new job offer</a>
+</p>
 
 {% if jobs is defined and jobs is not empty %}
     <ul>
         {% for job in jobs %}
             <li>
-                <strong>{{ job.title }}</strong><br>
-                {{ job.description }}
+                <h3>{{ job.title }}</h3>
+                <p>{{ job.description }}</p>
+
+                <a href="/recruiter/jobs/{{ job.id }}/applications">
+                    📄 View applications
+                </a>
+                |
+                <a href="/recruiter/jobs/{{ job.id }}/edit">
+                    ✏️ Edit
+                </a>
+                |
+                <a href="/recruiter/jobs/{{ job.id }}/archive"
+                   onclick="return confirm('Archive this job offer?');">
+                    🗑 Archive
+                </a>
             </li>
         {% endfor %}
     </ul>
 {% else %}
     <p>No job offers yet.</p>
 {% endif %}
+
+</body>
+</html>

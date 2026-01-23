@@ -6,7 +6,6 @@ use App\Models\Recruiter;
 use App\Repositories\RoleRepository;
 use PDO;
 
-// IMPORTANT: manually load Database class
 require_once __DIR__ . '/../../config/connection.php';
 
 class RecruiterRepository
@@ -16,7 +15,6 @@ class RecruiterRepository
 
     public function __construct()
     {
-        // Database is in the global namespace
         $this->db = \Database::connect();
         $this->roleRepository = new RoleRepository();
     }

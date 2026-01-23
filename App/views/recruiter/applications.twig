@@ -1,11 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Applications</title>
+    <link rel="stylesheet" href="/css/recruiter/applications.css">
+</head>
+<body>
+
 <h1>Applications</h1>
 
-<ul>
-  {% for app in applications %}
-    <li>
-      {{ app.candidateName }}
-      <a href="{{ app.cvPath }}">Download CV</a>
-      ({{ app.status }})
-    </li>
-  {% endfor %}
-</ul>
+<a href="/recruiter/dashboard">⬅ Back to dashboard</a>
+
+{% if applications is defined and applications is not empty %}
+    <ul>
+        {% for app in applications %}
+            <li>
+                <strong>{{ app.candidateName }}</strong><br>
+
+                <a href="/{{ app.cvPath }}" target="_blank">
+                    📎 Download CV
+                </a>
+                <br>
+
+                Status: <span>{{ app.status }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No applications for this job yet.</p>
+{% endif %}
+
+</body>
+</html>

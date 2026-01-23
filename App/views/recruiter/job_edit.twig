@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Job Offer</title>
+    <link rel="stylesheet" href="/css/recruiter/job_edit.css">
+</head>
+<body>
+
+<h1>Edit Job Offer</h1>
+
+<form method="post" action="/recruiter/jobs/{{ job.id }}/update">
+    <label>Job Title</label><br>
+    <input type="text" name="title" value="{{ job.title }}" required>
+
+    <br><br>
+
+    <label>Description</label><br>
+    <textarea name="description" rows="6" required>{{ job.description }}</textarea>
+
+    <br><br>
+
+    <label>Category</label><br>
+    <select name="category_id">
+        <option value="1" {% if job.categoryId == 1 %}selected{% endif %}>Web Development</option>
+        <option value="2" {% if job.categoryId == 2 %}selected{% endif %}>Data Science</option>
+        <option value="3" {% if job.categoryId == 3 %}selected{% endif %}>Management</option>
+        <option value="4" {% if job.categoryId == 4 %}selected{% endif %}>DevOps</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Save Changes</button>
+</form>
+
+<p>
+    <a href="/recruiter/dashboard">⬅ Back to dashboard</a>
+</p>
+
+</body>
+</html>
