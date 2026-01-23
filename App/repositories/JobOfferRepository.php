@@ -5,8 +5,6 @@ namespace App\Repositories;
 use App\Models\JobOffer;
 use PDO;
 
-require_once __DIR__ . '/../../config/connection.php';
-
 class JobOfferRepository
 {
     private PDO $db;
@@ -16,16 +14,16 @@ class JobOfferRepository
         $this->db = \Database::connect();
     }
 
-    public function findByRecruiter(int $recruiterId): array
+    public function findByRecruiter(string $recruiterEmail): array
     {
-        // Use the 'offers' table and link to recruiter via 'companies'
         $sql = "SELECT o.* 
                 FROM offers o
                 INNER JOIN companies c ON o.company_id = c.user_id
-                WHERE c.user_id = :rid AND o.deleted_at IS NULL";
+                INNER JOIN users u ON c.user_id = u.id
+                WHERE u.email = :email AND o.deleted_at IS NULL";
 
         $stmt = $this->db->prepare($sql);
-        $stmt->execute(['rid' => $recruiterId]);
+        $stmt->execute(['email' => $recruiterEmail]);
 
         $offers = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -33,23 +31,34 @@ class JobOfferRepository
                 $row['id'],
                 $row['title'],
                 $row['description'],
-                $row['company_id'], // recruiter ID
-                false // no is_archived column in DB
+                0, // you can keep 0 since you don’t want numeric ID
+                false,
+                (int)$row['category_id']
             );
         }
+
         return $offers;
     }
 
-    public function create(JobOffer $job): bool
+
+    public function create(JobOffer $job, string $recruiterEmail): bool
     {
+        // Find company_id by email
+        $sql = "SELECT user_id FROM users u
+                INNER JOIN companies c ON u.id = c.user_id
+                WHERE u.email = :email";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['email' => $recruiterEmail]);
+        $companyId = $stmt->fetchColumn();
+
         $sql = "INSERT INTO offers (title, description, company_id, category_id)
                 VALUES (:title, :description, :company_id, :category_id)";
 
         return $this->db->prepare($sql)->execute([
             'title' => $job->getTitle(),
             'description' => $job->getDescription(),
-            'company_id' => $job->getRecruiterId(),
-            'category_id' => $job->getCategoryId() ?? 1
+            'company_id' => $companyId,
+            'category_id' => $job->getCategoryId()
         ]);
     }
 

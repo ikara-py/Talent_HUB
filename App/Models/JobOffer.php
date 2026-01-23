@@ -7,7 +7,7 @@ class JobOffer
     private ?int $id;
     private string $title;
     private string $description;
-    private int $recruiterId; // or company_id
+    private int $recruiterId;
     private int $categoryId;
     private bool $isArchived;
 
@@ -17,7 +17,7 @@ class JobOffer
         string $description,
         int $recruiterId,
         bool $isArchived = false,
-        int $categoryId = 1 // default category
+        int $categoryId = 1
     ) {
         $this->id = $id;
         $this->title = $title;
@@ -33,6 +33,4 @@ class JobOffer
     public function getRecruiterId(): int { return $this->recruiterId; }
     public function getCategoryId(): int { return $this->categoryId; }
     public function isArchived(): bool { return $this->isArchived; }
-
-    public function setCategoryId(int $categoryId): void { $this->categoryId = $categoryId; }
 }
